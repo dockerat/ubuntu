@@ -60,7 +60,7 @@ RUN set -ex \
     \
     # 清理镜像，减少无用包
     && rm -rf /var/lib/apt/lists/* \
-    && apt clean
+    && apt autoclean
 
 
 ENTRYPOINT ["/usr/bin/entrypoint"]
