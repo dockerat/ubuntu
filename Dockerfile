@@ -18,6 +18,11 @@ ENV GID 1000
 
 
 
+VOLUME /config
+WORKDIR /config
+
+
+
 # 复制文件
 COPY docker /
 
