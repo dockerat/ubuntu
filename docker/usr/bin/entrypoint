@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# 设置Umask
+umask "${UMASK}"
+
+# 设置用户名
 if [ "${USERNAME}" != "storezhang" ]; then
   sed -i -e "s/^storezhang\:/${USERNAME}\:/g" /etc/passwd
 fi

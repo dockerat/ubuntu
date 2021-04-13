@@ -12,6 +12,7 @@ ENV LANG zh_CN.UTF-8
 ENV TZ=Asia/Chongqing
 
 # 设置运行用户及组
+ENV UMASK 022
 ENV USERNAME storezhang
 ENV UID 1000
 ENV GID 1000
