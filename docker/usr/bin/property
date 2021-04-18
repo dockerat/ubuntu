@@ -115,15 +115,15 @@ fi
 
 case "$1" in
   get)
-    getProperty "$1" "$2" "$3"
+    getProperty "$2" "$3" "$4"
     ;;
 
   check)
-    checkProperty "$1" "$2" "$3"
+    checkProperty "$2" "$3" "$4"
     ;;
 
   set)
-    setProperty "$1" "$2" "$3" "$4"
+    setProperty "$2" "$3" "$4"
     ;;
 
   *)
