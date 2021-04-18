@@ -34,6 +34,36 @@ function getProperty {
   echo "${value}"
 }
 
+function checkProperty {
+  if [ -z "$3" ] && [ -z "${setFilename}" ]; then
+    echo "没有设置文件名，退出..."
+    exit 1
+  fi
+
+  if [ "${setFilename}" ] && [ "$3" ]; then
+      echo "文件名是内置命令，退出..."
+      exit 1
+  else
+    if [ "$3" ] && [ ! -f "$3" ]; then
+      echo "文件不存在，退出..."
+      exit 1
+    elif [ "${setFilename}" ] && [ ! -f "${setFilename}" ]; then
+      echo "文件中没有找到Key，退出..."
+      exit 1
+    fi
+  fi
+
+  if [ "${setFilename}" ]; then
+    file=${setFilename}
+  else
+    file=$3
+  fi
+
+  key=$(cat "${file}" | grep "$2=" | cut -d'=' -f1)
+
+  echo "${key}"
+}
+
 function setProperty {
   if [ -z "$3" ]; then
     echo "没有Value，退出..."
@@ -64,8 +94,8 @@ function setProperty {
     file=$4
   fi
 
-  value=$(getProperty "$2" "$3" "$4")
-  if [ ! "${value}" ]; then
+  key=$(checkProperty "$1" "$2" "$3")
+  if [ ! "${key}" ]; then
     echo "$2=$3" >> "${file}"
   fi
 
@@ -88,11 +118,15 @@ case "$1" in
     getProperty "$1" "$2" "$3"
     ;;
 
+  check)
+    checkProperty "$1" "$2" "$3"
+    ;;
+
   set)
     setProperty "$1" "$2" "$3" "$4"
     ;;
 
   *)
-    echo "使用方法: $0 {set|get} key value filename"
+    echo "使用方法: $0 {set|get|check} key value filename"
     exit 1
 esac
