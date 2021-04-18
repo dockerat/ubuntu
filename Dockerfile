@@ -9,7 +9,7 @@ LABEL Description="Ubuntu基础镜像，增加中文支持以及挂载卷权限�
 
 # 增加中文支持，不然命令行执行程序会报错
 ENV LANG zh_CN.UTF-8
-ENV TZ=Asia/Chongqing
+ENV TZ=Asia/Shanghai
 
 # 设置运行用户及组
 ENV UMASK 022
@@ -39,15 +39,16 @@ RUN set -ex \
     \
     \
     \
-    # 安装JRE，确保可以启动应用
+    # 更新系统
     && apt update -y --fix-missing \
     && apt upgrade -y \
     \
     \
     \
-    # 安装守护进程，因为要Xvfb和Nuwa同时运行
+    # 安装权限执行程序以及后台守护进程
     && apt install -y s6 gosu \
     && chmod +x /usr/bin/entrypoint \
+    && chmod +x /usr/bin/property \
     \
     \
     \
@@ -58,7 +59,7 @@ RUN set -ex \
     \
     \
     \
-    # 设置时区为重庆
+    # 设置时区为上海
     && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && echo ${TZ} > /etc/timezone \
     \
