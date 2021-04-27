@@ -49,6 +49,7 @@ RUN set -ex \
     && apt install -y s6 gosu \
     && chmod +x /usr/bin/entrypoint \
     && chmod +x /usr/bin/property \
+    && chmod +x /etc/s6/.s6-svscan/* \
     \
     \
     \
