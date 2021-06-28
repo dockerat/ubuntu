@@ -62,7 +62,7 @@ RUN set -ex \
 
 # 增加中文支持，不然命令行执行程序会报错
 ENV LANG zh_CN.UTF-8
-ENV TZ=Asia/Shanghai
+ENV TZ Asia/Shanghai
 
 # 设置运行用户及组
 ENV UMASK 022
