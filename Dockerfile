@@ -2,20 +2,8 @@ FROM ubuntu
 
 
 MAINTAINER storezhang "storezhang@gmail.com"
-LABEL architecture="AMD64/x86_64" version="latest" build="2021-04-12"
-LABEL Description="Ubuntu基础镜像，增加中文支持以及挂载卷权限修复。"
-
-
-
-# 增加中文支持，不然命令行执行程序会报错
-ENV LANG zh_CN.UTF-8
-ENV TZ=Asia/Shanghai
-
-# 设置运行用户及组
-ENV UMASK 022
-ENV USERNAME storezhang
-ENV UID 1000
-ENV GID 1000
+LABEL architecture="AMD64/x86_64" version="latest" build="2021-06-28"
+LABEL Description="Ubuntu基础镜像，增加中文支持以及挂载卷权限修复"
 
 
 
@@ -69,6 +57,22 @@ RUN set -ex \
     # 清理镜像，减少无用包
     && rm -rf /var/lib/apt/lists/* \
     && apt autoclean
+
+
+
+# 增加中文支持，不然命令行执行程序会报错
+ENV LANG zh_CN.UTF-8
+ENV TZ=Asia/Shanghai
+
+# 设置运行用户及组
+ENV UMASK 022
+ENV USERNAME storezhang
+ENV UID 1000
+ENV GID 1000
+
+# 延迟启动
+ENV DELAY 1s
+
 
 
 ENTRYPOINT ["/usr/bin/entrypoint"]
