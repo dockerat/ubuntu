@@ -56,7 +56,7 @@ RUN set -ex \
     \
     \
     \
-    # 设置中文支持，不然运行NSIS时会报解析不了参数的错误
+    # 设置中文支持，不然参数如果是中文会报参数解析不了的错误
     && apt install -y locales \
     && sed -ie 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/g' /etc/locale.gen \
     && locale-gen \
