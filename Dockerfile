@@ -38,6 +38,15 @@ RUN set -ex \
     \
     \
     \
+    # 替换国内源
+    && sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && sed -i s@/security.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list \
+    && apt clean -y \
+    && apt update -y \
+    \
+    \
+    \
     # 创建用户及用户组，后续所有操作都以该用户为执行者，修复在Docker中创建的文件不能被外界用户所操作
     && addgroup --gid ${GID} --system ${USERNAME} \
     && adduser --uid ${UID} --gid ${GID} --system ${USERNAME} \
