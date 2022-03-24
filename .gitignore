@@ -1,22 +1,25 @@
-# Compiled class file
-*.class
+# 编译文件
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+dist/
 
-# Log file
-*.log
+# 测试文件
+*.test
+*.db
 
-# BlueJ files
-*.ctxt
+# 配置文件
+.idea/
+.vscode/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# 各种工具中间文件
+*.out
+*.lock
+*.sum
 
-# Package Files #
-*.jar
-*.war
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+# 依赖文件
+vendor/
+scripts/
+node_modules/

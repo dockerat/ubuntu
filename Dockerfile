@@ -1,9 +1,11 @@
 FROM ubuntu
 
 
-MAINTAINER storezhang "storezhang@gmail.com"
-LABEL architecture="AMD64/x86_64" version="latest" build="2021-06-28"
-LABEL Description="Ubuntu基础镜像，增加中文支持以及挂载卷权限修复"
+LABEL author="storezhang<华寅>"
+LABEL email="storezhang@gmail.com"
+LABEL qq="160290688"
+LABEL wechat="storezhang"
+LABEL description="Ubuntu基础镜像，增加中文支持以及挂载卷权限修复"
 
 
 
