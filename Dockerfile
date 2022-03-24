@@ -22,10 +22,9 @@ ENV GID 1000
 # 延迟启动
 ENV DELAY 1s
 
-
-
-VOLUME /config
-WORKDIR /config
+ENV HOME /config
+VOLUME ${HOME}
+WORKDIR ${HOME}
 
 
 
@@ -49,7 +48,7 @@ RUN set -ex \
     \
     # 创建用户及用户组，后续所有操作都以该用户为执行者，修复在Docker中创建的文件不能被外界用户所操作
     && addgroup --gid ${GID} --system ${USERNAME} \
-    && adduser --uid ${UID} --gid ${GID} --system ${USERNAME} \
+    && adduser --uid ${UID} --gid ${GID} --system ${USERNAME} --home ${HOME} \
     \
     \
     \
