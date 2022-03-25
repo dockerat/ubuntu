@@ -80,6 +80,7 @@ RUN set -ex \
     \
     \
     # 清理镜像，减少无用包
+    && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/* \
     && apt autoclean
 
