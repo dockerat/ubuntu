@@ -24,6 +24,7 @@ steps:
         from_secret: password_tencentyun_ccr
     settings:
       repository: storezhang/ubuntu
+      tag: 22.10.3
       registries:
         - username: storezhang
           password: $${PASSWORD_DOCKER}
@@ -31,3 +32,9 @@ steps:
           username: "160290688"
           password: $${PASSWORD_CCR}
           required: true
+
+
+volumes:
+  - name: docker
+    host:
+      path: /var/lib/cache/docker
