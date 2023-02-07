@@ -16,8 +16,8 @@ ENV TZ Asia/Shanghai
 # 设置运行用户及组
 ENV UMASK 022
 ENV USERNAME storezhang
-ENV UID 1000
-ENV GID 1000
+ENV UID 2000
+ENV GID 2000
 
 # 延迟启动
 ENV DELAY 1s
@@ -47,8 +47,8 @@ RUN set -ex \
     \
     \
     # 创建用户及用户组，后续所有操作都以该用户为执行者，修复在Docker中创建的文件不能被外界用户所操作
-    && addgroup --gid ${GID} --system ${USERNAME} \
-    && adduser --uid ${UID} --gid ${GID} --system ${USERNAME} --home ${USER_HOME} \
+    && groupadd --gid ${GID} --system ${USERNAME} \
+    && useradd --uid ${UID} --gid ${GID} --system ${USERNAME} --home-dir ${USER_HOME} \
     \
     \
     \
