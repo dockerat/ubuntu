@@ -24,7 +24,7 @@ steps:
         from_secret: password_tencentyun_ccr
     settings:
       repository: storezhang/ubuntu
-      tag: 22.10.3
+      tag: exp:file("Dockerfile")[12:17].$${DRONE_BUILD_NUMBER}
       registries:
         - username: storezhang
           password: $${PASSWORD_DOCKER}
