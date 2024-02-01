@@ -1,3 +1,25 @@
+kind: secret
+name: password_ccr
+get:
+  path: secrets
+  name: password_ccr
+---
+
+kind: secret
+name: feishu_id
+get:
+  path: secrets
+  name: feishu_id
+---
+
+kind: secret
+name: feishu_secret
+get:
+  path: secrets
+  name: feishu_secret
+---
+
+
 kind: pipeline
 type: docker
 name: Ubuntu
@@ -8,7 +30,7 @@ clone:
 
 
 steps:
-  - name: 代码
+  - name: 取码
     image: ccr.ccs.tencentyun.com/dronestock/git
 
   - name: 发布
@@ -21,7 +43,7 @@ steps:
       PASSWORD_DOCKER:
         from_secret: token_docker
       PASSWORD_CCR:
-        from_secret: password_tencentyun_ccr
+        from_secret: password_ccr
     settings:
       repository: storezhang/ubuntu
       tag: exp:file("Dockerfile")[12:17] + ".$${DRONE_BUILD_NUMBER}"
@@ -32,6 +54,19 @@ steps:
           username: "160290688"
           password: $${PASSWORD_CCR}
           required: true
+
+  - name: 通知
+    image: ccr.ccs.tencentyun.com/dronestock/feishu
+    pull: always
+    when:
+      status:
+        - success
+        - failure
+    settings:
+      id:
+        from_secret: feishu_id
+      secret:
+        from_secret: feishu_secret
 
 
 volumes:
