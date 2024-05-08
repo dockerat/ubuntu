@@ -55,7 +55,7 @@ steps:
         from_secret: password_ccr
     settings:
       repository: storezhang/ubuntu
-      tag: match(file('Dockerfile'), '.*(FROM ubuntu:(.*)\\\\s*).*')[2] + ".$${DRONE_BUILD_NUMBER}"
+      tag: match(file('Dockerfile'), '.*(FROM ubuntu:(.*)\\\\s*).*')[2]
       platforms:
         - arch: arm
           variant: v7
