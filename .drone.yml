@@ -39,9 +39,11 @@ clone:
 steps:
   - name: 取码
     image: ccr.ccs.tencentyun.com/dronestock/git
+    pull: always
 
   - name: 发布
     image: ccr.ccs.tencentyun.com/dronestock/docker
+    pull: always
     privileged: true
     volumes:
       - name: docker
