@@ -1,4 +1,11 @@
 kind: secret
+name: token_docker
+get:
+  path: secrets
+  name: token_docker_dronestock
+---
+
+kind: secret
 name: password_ccr
 get:
   path: secrets
@@ -6,17 +13,17 @@ get:
 ---
 
 kind: secret
-name: feishu_id
+name: id_feishu
 get:
   path: secrets
-  name: feishu_id
+  name: id_feishu
 ---
 
 kind: secret
-name: feishu_secret
+name: secret_feishu
 get:
   path: secrets
-  name: feishu_secret
+  name: secret_feishu
 ---
 
 
@@ -47,13 +54,17 @@ steps:
     settings:
       repository: storezhang/ubuntu
       tag: exp:file("Dockerfile")[12:17] + ".$${DRONE_BUILD_NUMBER}"
+      platforms:
+        - arch: arm
+          variant: v7
+        - arch: arm64
+        - arch: amd64
       registries:
         - username: storezhang
           password: $${PASSWORD_DOCKER}
         - hostname: ccr.ccs.tencentyun.com
           username: "160290688"
           password: $${PASSWORD_CCR}
-          required: true
 
   - name: 通知
     image: ccr.ccs.tencentyun.com/dronestock/feishu
@@ -64,9 +75,11 @@ steps:
         - failure
     settings:
       id:
-        from_secret: feishu_id
+        from_secret: id_feishu
       secret:
-        from_secret: feishu_secret
+        from_secret: secret_feishu
+      notfound:
+        id: storezhang
 
 
 volumes:
