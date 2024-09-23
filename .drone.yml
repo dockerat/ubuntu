@@ -54,7 +54,7 @@ steps:
       PASSWORD_CCR:
         from_secret: password_ccr
     settings:
-      repository: storezhang/ubuntu
+      repository: dockerat/ubuntu
       tag: match(file('Dockerfile'), '.*(FROM ubuntu:(.*)\s*).*')[2] + '.$${DRONE_BUILD_NUMBER}'
       platforms:
         - arch: arm
@@ -62,8 +62,6 @@ steps:
         - arch: arm64
         - arch: amd64
       registries:
-        - username: storezhang
-          password: $${PASSWORD_DOCKER}
         - hostname: ccr.ccs.tencentyun.com
           username: "160290688"
           password: $${PASSWORD_CCR}
